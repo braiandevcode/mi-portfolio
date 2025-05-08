@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 // import { defineConfig } from 'vitest/config';
 import tailwindcss from '@tailwindcss/vite';
-import react from '@vitejs/plugin-react-swc';
+import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [
@@ -18,5 +18,4 @@ export default defineConfig({
   // test:{
   //   environment:'happy-dom',
   // }
-  // Aquí puedes agregar más configuraciones si es necesario
 });
