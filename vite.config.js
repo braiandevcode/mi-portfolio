@@ -1,18 +1,22 @@
-// import { defineConfig } from 'vite';
-import { defineConfig } from 'vitest/config';
+import { defineConfig } from 'vite';
+// import { defineConfig } from 'vitest/config';
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react-swc';
 
 export default defineConfig({
-  // Acá podés configurar otras cosas de Vite si las necesitás
-  plugins:[
+  plugins: [
     react(),
     tailwindcss()
   ],
   server: {
-    host: true, // Para usarlo dentro de Docker o desde otra máquina
+    host: true,
   },
-  test:{
-    environment:'happy-dom',
-  }
+  build: {
+    outDir: 'dist',
+    minify: 'esbuild',  // Habilitar minificación de código
+  },
+  // test:{
+  //   environment:'happy-dom',
+  // }
+  // Aquí puedes agregar más configuraciones si es necesario
 });
