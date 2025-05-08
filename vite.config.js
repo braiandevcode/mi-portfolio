@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 // import { defineConfig } from 'vitest/config';
 import tailwindcss from '@tailwindcss/vite';
-import react from '@vitejs/plugin-react';
+import react from '@vitejs/plugin-react-swc';
 
 export default defineConfig({
   plugins: [
@@ -15,7 +15,8 @@ export default defineConfig({
     outDir: 'dist',
     minify: 'esbuild',  // Habilitar minificación de código
   },
-  // test:{
-  //   environment:'happy-dom',
-  // }
+  esbuild: {
+    // Apunta al tsconfig adecuado para Vite
+    tsconfig: './tsconfig.json',  // Asegura que Vite use tu tsconfig.json principal
+  },
 });
