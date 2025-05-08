@@ -15,8 +15,4 @@ export default defineConfig({
     outDir: 'dist',
     minify: 'esbuild',  // Habilitar minificación de código
   },
-  esbuild: {
-    // Apunta al tsconfig adecuado para Vite
-    tsconfig: './tsconfig.json',  // Asegura que Vite use tu tsconfig.json principal
-  },
 });
