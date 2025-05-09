@@ -14,7 +14,7 @@ export default function App() {
         <>
             {cargandoApp && (
                 <div className="fixed inset-0 bg-white z-50 flex justify-center items-center">
-                    <img src="/src/images/loader.svg" alt="Cargando..." className="w-20 h-20 animate-spin" />
+                    <img src="/dist/images/loader.svg" alt="Cargando..." className="w-20 h-20 animate-spin" />
                 </div>
             )}
             <Header />
