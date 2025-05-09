@@ -24,5 +24,6 @@ dist-ssr
 *.sln
 *.sw?
 .dockerignore
-Dockerfile.dev
+Dockerfile*
+docker-compose.yml
 docker-compose.dev.yml
