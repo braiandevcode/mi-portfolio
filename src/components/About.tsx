@@ -1,5 +1,6 @@
 import { AppData } from "../types/types";
 import StudyCard from "./CardStudies";
+import TrajectoryCard from "./CardTrajectory";
 
 export default function About({ trajectory, studies }: Pick<AppData, 'trajectory' | 'studies'>) {
   return (
@@ -10,7 +11,11 @@ export default function About({ trajectory, studies }: Pick<AppData, 'trajectory
         <div className="flex flex-col md:flex-row gap-8">
           {/* Trajectory */}
           <div className="md:w-1/2">
-            <p className="text-base md:text-lg mb-6">{trajectory?.info_trajectory}</p>
+            {
+              trajectory && <>
+                <TrajectoryCard info_trajectory={trajectory?.info_trajectory} />
+              </>
+            }
           </div>
 
           {/* Studies */}
