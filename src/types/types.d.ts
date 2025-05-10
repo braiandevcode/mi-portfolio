@@ -76,6 +76,26 @@ export interface FormData {
     message: string;
 }
 
-export  type FormErrors = {
+export type FormErrors = {
     [key: string]: string; // Acepta claves de tipo string y valores de tipo string
+};
+
+export type AppData = {
+    currentFocus?: TCurrentFocus;
+    profile?: TProfile;
+    projects?: TProject[];
+    skills?: TSkill[];
+    trajectory?: TTrajectory;
+    studies?: TStudy[];
+}
+
+export type ApiResponse<T> = {
+  success: boolean;
+  message: string;
+  result: T;
+};
+
+export type ApiError = {
+  status: number;
+  message: string;
 };

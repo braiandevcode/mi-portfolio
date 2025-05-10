@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { contactSchema } from "../helper/validator"; // Asegúrate de que la ruta sea correcta
 import { z } from "zod";
-import apiCall from "../helper/helper_query_api";
+import {apiCall} from "../helper/helper_query_api";
 import config from "../config/configAPI";
 import Modal from "./Modal";
 import { FormData, FormErrors } from "../types/types";
+import { validateFields } from "../helper/validateFields";
 
 export default function Contact() {
     // INICIAMOS TODOS LOS ESTADOS NECESARIOS
@@ -34,40 +35,8 @@ export default function Contact() {
         // Validación en tiempo real con Zod para cada campo
         let fieldError: string | undefined;
 
-        // Validar el campo individualmente según el nombre del campo
-        try {
-            switch (name) {
-                case "nameContact": {
-                    contactSchema.pick({ nameContact: true }).parse({ nameContact: value });
-                    break;
-                }
-                case "emailContact": {
-                    contactSchema.pick({ emailContact: true }).parse({ emailContact: value });
-                    break;
-                }
-                case "subjectContact": {
-                    contactSchema.pick({ subjectContact: true }).parse({ subjectContact: value });
-                    break;
-                }
-                case "message": {
-                    contactSchema.pick({ message: true }).parse({ message: value });
-                    break;
-                }
-                default: {
-                   return;
-                }
-            }
-            // Si la validación pasa, eliminamos el error
-            setErrors((prevErrors) => {
-               const newErrors = { ...prevErrors };
-               delete newErrors[name]; // Elimina el error si es válido
-               return newErrors;
-           });
-        } catch (err) {
-            if(err instanceof z.ZodError){
-                fieldError = err.errors[0]?.message; // Obtener el mensaje de error
-            }
-        }
+        // FUNCION PARA VALIDAR CAMPOS DE CONTACTO
+        validateFields({field: name as keyof FormData, value, setErrors});
 
         // Si hay un error, lo agregamos al estado
         if (fieldError) {

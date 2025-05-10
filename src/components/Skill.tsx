@@ -1,21 +1,8 @@
-import { useEffect, useState } from 'react';
+import { AppData } from '../types/types';
 import GroupFocusContentCard from './GroupContentFocusCard';
 import GroupSkillCards from './GroupSkillCards';
 
-interface SkillProps {
-    setCargandoApp: (value: boolean) => void;
-}
-
-export default function Skill({ setCargandoApp }: SkillProps) {
-    const [isSkillsLoaded, setIsSkillsLoaded] = useState(false);
-    const [isFocusLoaded, setIsFocusLoaded] = useState(false);
-
-    useEffect(() => {
-        if (isSkillsLoaded && isFocusLoaded) {
-            setCargandoApp(false);
-        }
-    }, [isSkillsLoaded, isFocusLoaded, setCargandoApp]);
-
+export default function Skill({ skills, currentFocus }: Pick<AppData, 'skills' | 'currentFocus'>) {
     return (
         <section id="skills" className="py-16 bg-gray-50">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -28,9 +15,9 @@ export default function Skill({ setCargandoApp }: SkillProps) {
                     <i className="fas fa-arrow-right ml-2"></i>
                 </div>
                 <div className="overflow-x-auto lg:overflow-visible">
-                    <GroupSkillCards onLoaded={() => setIsSkillsLoaded(true)} />
+                    <GroupSkillCards skills={skills}/>
                 </div>
-                <GroupFocusContentCard onLoaded={() => setIsFocusLoaded(true)} />
+                <GroupFocusContentCard currentFocus={currentFocus}/>
             </div>
         </section>
     );
