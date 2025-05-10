@@ -1,4 +1,5 @@
 import {  AppData } from "../types/types";
+import StudyCard from "./CardStudies";
 
 export default function About({ trajectory, studies }: Pick<AppData, 'trajectory' | 'studies'>) {
   return (
@@ -10,7 +11,14 @@ export default function About({ trajectory, studies }: Pick<AppData, 'trajectory
             <h3 className="text-xl font-semibold mb-2">Estudios</h3>
             <ul className="list-disc pl-6">
               {studies?.map((study) => (
-                <li key={study.id_study}>{study.title}</li>
+                <li key={study.id_study}>
+                 <StudyCard 
+                    period={study.period} 
+                    institution={study.institution} 
+                    title={study.title} 
+                    text_info={study.text_info}
+                  />
+                </li> 
               ))}
             </ul>
           </div>
