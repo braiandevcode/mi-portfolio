@@ -16,7 +16,7 @@ export default function About({ trajectory, studies }: Pick<AppData, 'trajectory
           {/* Studies */}
           <div className="md:w-1/2">
             <h3 className="text-xl font-semibold mb-2">Estudios</h3>
-            <ul className="list-disc pl-6">
+            <div className="flex flex-col gap-3 list-disc pl-6">
               {studies?.map((study) => (
                 <StudyCard
                   key={study.id_study}
@@ -26,7 +26,7 @@ export default function About({ trajectory, studies }: Pick<AppData, 'trajectory
                   text_info={study.text_info}
                 />
               ))}
-            </ul>
+            </div>
           </div>
         </div>
       </div>
