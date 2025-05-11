@@ -82,13 +82,14 @@ export default function Header() {
                 {/* Mobile menu */}
                 <div
                     className={`fixed top-0 left-0 z-40 w-full h-min transition-transform ${hiddeMenu ? "-translate-y-full" : "translate-y-16"
-                        } duration-500 delay-500 ease-in-out bg-white shadow-lg`}
+                        } duration-500 ease-in-out bg-white shadow-lg`}
                 >
                     <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                         {navLinks.map((link) => (
                             <Link
                                 key={link.href}
                                 to={link.href}
+                                onClick={showMenu}
                                 className="px-3 py-2 rounded-md text-base font-medium hover:bg-accent flex items-center gap-2"
                             >
                                 <i className={link.icon} />
