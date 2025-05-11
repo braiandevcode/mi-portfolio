@@ -69,7 +69,7 @@ export default function App() {
                 <Routes>
                     <Route
                         element={
-                            <div className="flex flex-col min-h-screen">
+                            <div className="flex flex-col min-h-full">
                                 <Header />
                                 <main className="flex-grow">
                                     <Outlet />

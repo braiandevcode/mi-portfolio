@@ -6,26 +6,10 @@ export default function HeroCardInfo({ file_name, title, subtitle, text_info }: 
     const nameText = title.substring(10); // tomo del  caracter 10 al final
     const [firstWord, secondWord] = subtitle.split('|');
 
-    // useEffect(() => {
-    //     const links = document.querySelectorAll("a[href^='#']");
-    //     links.forEach(link => {
-    //         link.addEventListener("click", e => {
-    //             e.preventDefault();
-    //             const targetId = link.getAttribute("href")?.replace("#", "");
-    //             if (targetId) {
-    //                 const target = document.getElementById(targetId);
-    //                 if (target) {
-    //                     target.scrollIntoView({ behavior: "smooth" });
-    //                 }
-    //             }
-    //         });
-    //     });
-    // }, []);
-
     return (
         <>
             <div className="md:w-1/2 mb-10 md:mb-0">
-                <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold leading-tight mb-4">
+                <h1 className="pt-8 text-2xl md:text-4xl lg:text-5xl font-bold leading-tight mb-4">
                     {hiText} <span className="gradient-text">{nameText}</span>
                 </h1>
                 <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold text-gray-600 mb-6">
@@ -34,7 +18,7 @@ export default function HeroCardInfo({ file_name, title, subtitle, text_info }: 
                 <p className="text-lg text-gray-600 mb-8 max-w-lg">{text_info}</p>
                 <div className="flex gap-x-3 text-[0.8rem] md:text-[1rem]">
                     <Link to="/contacto"
-                        className="bg-accent hover:bg-accentDark text-white px-2 py-1 md:px-6 md:py-3 rounded-md font-medium transition duration-300">
+                        className="bg-accent hover:bg-accentDark text-white px-4 py-2 md:px-6 md:py-3 rounded-md font-medium transition duration-300">
                         Contáctame
                     </Link>
                     <Link to="/proyectos"

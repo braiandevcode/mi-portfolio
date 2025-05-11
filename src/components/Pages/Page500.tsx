@@ -3,11 +3,11 @@ import Image from "../Image";
 export default function Page500() {
     return (
         <>
-            <div className="flex flex-col items-center gap-1.5 md:text-3xl text-sm p-1">
+            <div className="flex items-center">
                 <Image
                     src="/images/error-500.png"
-                    alt="Error 503 - Servicio temporalmente no disponible"
-                    className="w-full h-auto object-contain"
+                    alt="Error 500 - Servicio temporalmente no disponible"
+                    className="flex items-center w-screen h-screen object-contain"
                 />
             </div>
         </>

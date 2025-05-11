@@ -20,7 +20,7 @@ export default function Page503(
 
     return (
         <>
-            <div className="relative flex items-center gap-1.5 md:text-3xl text-sm p-1">
+            <div className="relative flex items-center md:text-3xl text-sm">
                 <Image
                     src="/images/warn-503.png"
                     alt="Error 503 - Servicio temporalmente no disponible"

@@ -10,7 +10,7 @@ export default function Footer() {
                         <Link to="/" className="font-bold code-font flex items-center justify-center">
                             <span className="text-accent">&lt;</span>BraianPalacios<span className="text-accent">/&gt;</span>
                         </Link>
-                        <p className="text-gray-400 mt-2">Braian Palacios | Full Stack Developer</p>
+                        <p className="text-sm text-gray-400 mt-2">Braian Palacios | Full Stack Developer</p>
                     </div>
                     <div className="flex space-x-6">
                         <a href="https://github.com/braiandevcode" target="_blank" referrerPolicy="no-referrer" className="text-gray-400 hover:text-accent text-xl">

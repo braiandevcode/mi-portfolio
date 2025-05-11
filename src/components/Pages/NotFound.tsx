@@ -3,7 +3,7 @@ import Image from "../Image";
 export default function NotFound() {
     return (
         <>
-            <div className="flex flex-col items-center gap-1.5 md:text-3xl text-sm p-1">
+            <div className="flex flex-col items-center">
                 <Image
                     src="/images/error-404.png"
                     alt="Página no encontrada"
