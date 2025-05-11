@@ -1,28 +1,26 @@
 import { useEffect, useState } from "react";
-import About from "./components/About";
-import Contact from "./components/Contact";
+import About from "./components/Pages/About";
+import Contact from "./components/Pages/Contact";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
-import Hero from "./components/Hero";
-import Proyect from "./components/Proyect";
-import Skill from "./components/Skill";
 import { AppData, TCurrentFocus, TProfile, TProject, TResponseApi, TSkill, TStudy, TTrajectory } from "./types/types";
 import { apiCall } from "./helper/helper_query_api";
 import config from "./config/configAPI"
 import Image from "./components/Image";
 
+import { Routes, Route, Outlet } from 'react-router';
+import HomePage from "./components/Pages/Hero";
+import Proyect from "./components/Pages/Proyect";
+import Skill from "./components/Pages/Skill";
+import NotFound from "./components/Pages/NotFound";
+import Page503 from "./components/Pages/Page503";
+import Page500 from "./components/Pages/Page500";
 
 export default function App() {
     const [cargandoApp, setCargandoApp] = useState(true);
     const [error, setError] = useState<TResponseApi | null>(null);
-
     const [data, setData] = useState<AppData | null>(null);
-
-    // Función para volver a intentar la carga de datos
-    const handleRetry = () => {
-        setCargandoApp(true);
-        setError(null);
-    };
+     const [retryTrigger, setRetryTrigger] = useState(0);
 
     useEffect(() => {
         const fetchAll = async () => {
@@ -53,7 +51,7 @@ export default function App() {
         };
 
         fetchAll();
-    }, []);
+    }, [retryTrigger]);
 
     return (
         <>
@@ -62,51 +60,32 @@ export default function App() {
                     <Image src="/images/loader.svg" alt="Cargando..." className="w-20 h-20 animate-spin" />
                 </div>
             ) : error ? (
-                error.status === 404 ? (
-                    <Image
-                        src="/images/error-404.png"
-                        alt="Página no encontrada"
-                        className="w-screen h-screen object-cover"
-                    />
-                ) : error.status === 500 ? (
-                    <Image
-                        src="/images/error-500.png"
-                        alt="Error del servidor"
-                        className="w-screen h-screen object-cover"
-                    />
-                ) : error.status === 503 ? (
-                        <div className="relative">
-                            <Image
-                                src="/images/warn-200.png"
-                                alt="Error temporal inesperado"
-                                className="w-screen h-screen object-cover"
-                            />
-                            <button
-                                type="button"
-                                onClick={handleRetry}
-                                className="absolute bottom-10 left-1/2 transform -translate-x-1/2 bg-white/80 text-blue-600 hover:text-blue-800 px-6 py-2 rounded-full shadow-lg backdrop-blur z-10 flex items-center gap-2"
-                            >
-                                <i className="fas fa-rotate-right"></i>
-                                <span>Reintentar</span>
-                            </button>
-                        </div>
-                    ): (
-                            <Image
-                                src="/images/error-500.png"
-                                alt="Error del servidor"
-                                className="w-screen h-screen object-cover"
-                            />
-                        )
+                error.status === 503 ? (
+                    <Page503 setError={setError} setCargandoApp={setCargandoApp} retry={()=>setRetryTrigger(prev => prev + 1)}/>
+                ) : (
+                    <Page500 />
+                )
             ) : (
-                <>
-                    <Header />
-                    <Hero profile={data?.profile} />
-                    <Skill skills={data?.skills} currentFocus={data?.currentFocus} />
-                    <About studies={data?.studies} trajectory={data?.trajectory} />
-                    <Proyect projects={data?.projects} />
-                    <Contact />
-                    <Footer />
-                </>
+                <Routes>
+                    <Route
+                        element={
+                            <div className="flex flex-col min-h-screen">
+                                <Header />
+                                <main className="flex-grow">
+                                    <Outlet />
+                                </main>
+                                <Footer />
+                            </div>
+                        }
+                    >
+                        <Route path="/" element={<HomePage profile={data?.profile} />} />
+                        <Route path="/acerca" element={<About trajectory={data?.trajectory} studies={data?.studies} />} />
+                        <Route path="/contacto" element={<Contact />} />
+                        <Route path="/proyectos" element={<Proyect projects={data?.projects} />} />
+                        <Route path="/habilidades" element={<Skill currentFocus={data?.currentFocus} skills={data?.skills} />} />
+                    </Route>
+                    <Route path="*" element={<NotFound />} />
+                </Routes>
             )}
         </>
     );

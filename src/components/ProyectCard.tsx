@@ -25,7 +25,7 @@ export default function ProyectCard({
 
       {/* Contenido */}
       <div className="p-6">
-        <h3 className="font-bold text-xl mb-2">{title}</h3>
+        <h3 className="font-bold text-[16px] md:text-xl mb-2">{title}</h3>
         <p className="text-gray-600 mb-4 line-clamp-3">
           {info_project}
         </p>
@@ -33,7 +33,7 @@ export default function ProyectCard({
         {/* Tecnologías */}
         <div className="flex flex-wrap gap-2 mb-4">
           {techList.map((tech, idx) => (
-            <span key={idx} className="bg-accent/10 text-accent text-xs px-3 py-1 rounded-full">
+            <span key={idx} className="bg-accent/10 text-accent text-[16px] md:text-xs px-3 py-1 rounded-full">
               {tech}
             </span>
           ))}

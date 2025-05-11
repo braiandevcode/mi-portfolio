@@ -1,30 +1,3 @@
-// import config from '../config/configAPI';
-// const apiCall = async <T = any>(endpoint: string, options?: RequestInit): Promise<T> => {
-//   try {
-//     const result = await fetch(`${config.URL}${config.ENDPOINT}${endpoint}`, options);
-//     const data = await result.json();
-
-//     if (!result.ok) {
-//       throw {
-//         status: result.status,
-//         message: result.statusText,
-//       };
-//     }
-
-//     if (!data.success) {
-//       throw {
-//         status: result.status,
-//         message: data.message,
-//       };
-//     }
-//     return data.result;
-//   } catch (error) {
-//     throw error;
-//   }
-// };
-
-// export default apiCall;
-
 import config from '../config/configAPI';
 import { ApiError, ApiResponse } from '../types/types';
 
@@ -59,10 +32,11 @@ export const apiCall = async <T = unknown>(endpoint: string, options?: RequestIn
 
     return data.result;
   } catch (error) {
+   
     // Manejo explícito del tipo
     if (error instanceof TypeError) {
       throw {
-        status: 0,
+        status: 503,
         message: 'No se pudo conectar con el servidor. ¿Está apagado o sin conexión?',
       } satisfies ApiError;
     }

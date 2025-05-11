@@ -4,7 +4,7 @@ export default function StudyCard({ title, institution, period, text_info }: Omi
     return (
         <div className="relative timeline-item">
             <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
-                <div className="flex justify-between items-start mb-2">
+                <div className="flex flex-col items-start gap-1.5 lg:flex-row md:gap-0 lg:justify-between lg:items-start mb-2">
                     <h4 className="font-bold text-lg">
                         {title}
                         {institution && (
@@ -14,7 +14,7 @@ export default function StudyCard({ title, institution, period, text_info }: Omi
                             </>
                         )}
                     </h4>
-                    <span className="bg-accent text-white text-xs px-2 py-1 rounded">
+                    <span className="bg-accent text-white text-[0.7rem] md:text-[0.9rem] px-2 py-1 rounded">
                         {period}
                     </span>
                 </div>
