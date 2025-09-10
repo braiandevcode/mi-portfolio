@@ -1,18 +1,20 @@
 import config from '../config/configAPI';
 import { ApiError, ApiResponse } from '../types/types';
 
+// FUNCION HELPER  PARA TODAS LAS CONSULTAS
 export const apiCall = async <T = unknown>(endpoint: string, options?: RequestInit): Promise<T> => {
   try {
-    const response = await fetch(`${config.URL}${config.ENDPOINT}${endpoint}`, options);
+    // RUTA + ENDPOINT + OPCIONALMENTE CABECERA
+    const response = await fetch(`${config.URL}${config.ENDPOINT}${endpoint}`, options); //==> CONSULTAS
 
-    let data: ApiResponse<T>;
+    let data: ApiResponse<T>; // VARIABLE DE TIPO ApiResponse CON GENERICO
 
     try {
-      data = await response.json();
+      data = await response.json(); // ==> CONVERTIR A JSON
     } catch {
       throw {
-        status: response.status || 500,
-        message: 'Respuesta inválida del servidor',
+        status: response.status || 503, // SI RESPONSE.STATUS NO EXISTE (RESPUESTA VACÍA O INVÁLIDA), LO TRATAMOS COMO 503
+        message: 'Respuesta inválida del servidor', //==> MENSAJE DEL ERROR
       } satisfies ApiError;
     }
 
@@ -23,6 +25,7 @@ export const apiCall = async <T = unknown>(endpoint: string, options?: RequestIn
       } satisfies ApiError;
     }
 
+    // SI NO FUE SATISFACTORIO
     if (!data.success) {
       throw {
         status: response.status,
@@ -30,10 +33,9 @@ export const apiCall = async <T = unknown>(endpoint: string, options?: RequestIn
       } satisfies ApiError;
     }
 
-    return data.result;
+    return data.result;  // ==> SINO RETORNAR EL RESULTADO
   } catch (error) {
-   
-    // Manejo explícito del tipo
+    // MANEJO EXPLICITO DEL TIPO DE ERROR
     if (error instanceof TypeError) {
       throw {
         status: 503,

@@ -24,7 +24,6 @@ import Skill from "./components/Pages/Skill";
 import NotFound from "./components/Pages/NotFound";
 import Page503 from "./components/Pages/Page503";
 import Page500 from "./components/Pages/Page500";
-import PageDbSleep from "./components/Pages/PageDBSleep";
 
 export default function App() {
   const [cargandoApp, setCargandoApp] = useState(true);
@@ -33,6 +32,7 @@ export default function App() {
   const [retryTrigger, setRetryTrigger] = useState(0);
 
   useEffect(() => {
+    // CREAR EL EL FETCH
     const fetchAll = async () => {
       try {
         setCargandoApp(true);
@@ -61,9 +61,11 @@ export default function App() {
       }
     };
 
-    fetchAll();
-  }, [retryTrigger]);
+    fetchAll(); //EJECUTARLO EN CADA USEEFCT
+  }, [retryTrigger]); //==> EL EFECTO SE EJECUTA EN CADA RETRY
 
+  console.log(error);
+  console.log(error?.status);
   return (
     <>
       {cargandoApp ? (
@@ -77,12 +79,6 @@ export default function App() {
       ) : error ? (
         error.status === 503 ? (
           <Page503
-            setError={setError}
-            setCargandoApp={setCargandoApp}
-            retry={() => setRetryTrigger((prev) => prev + 1)}
-          />
-        ) : error.status === 0 ? (
-          <PageDbSleep
             setError={setError}
             setCargandoApp={setCargandoApp}
             retry={() => setRetryTrigger((prev) => prev + 1)}
@@ -124,8 +120,8 @@ export default function App() {
                 />
               }
             />
+            <Route path="*" element={<NotFound />} />
           </Route>
-          <Route path="*" element={<NotFound />} />
         </Routes>
       )}
     </>
