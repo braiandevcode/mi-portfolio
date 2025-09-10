@@ -1,21 +1,11 @@
 import { TResponseApi } from "../../types/types";
 import Image from "../Image";
-export default function Page503(
-    {
-        setError,
-        setCargandoApp,
-        retry,
-    }: {
-        setError: (data: TResponseApi | null) => void;
-        setCargandoApp: (load: boolean) => void;
-        retry: () => void;
-    }) {
-
-    // Función para volver a intentar la carga de datos
+export default function Page503({ setError, setCargandoApp, retry }: { setError: (data: TResponseApi | null) => void; setCargandoApp: (load: boolean) => void; retry: () => void; }) {
+    // FUNCION PARA VOLVER A INTENTAR RECARGAR WEB
     const handleRetry = () => {
         setCargandoApp(true);
         setError(null);
-        retry(); // ← dispara de nuevo la carga
+        retry(); // DISPARA DE NUEVO LA CARGA
     };
 
     return (
